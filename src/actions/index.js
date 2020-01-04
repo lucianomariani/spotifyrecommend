@@ -1,11 +1,10 @@
 import {LOADING_HIDE, LOADING_SHOW, FETCH_PLAYLIST_TRACKS_SUCCESS,FETCH_PLAYLISTS_RESET, FETCH_PLAYLIST_TRACKS_ERROR,  FETCH_PLAYLISTS_SUCCESS, FETCH_PLAYLISTS_ERROR, FETCH_TRACK_SUCCESS, FETCH_TRACK_ERROR, LOGIN_SUCCESS,LOGIN_ERROR, LOGOUT_SUCCESS } from './types'
 
-const API_URL = process.env.REACT_APP_API_URL
 
 export const fetchPlaylists = () => {
   const TOKEN = localStorage.getItem('access_token')
   const COUNTRY = localStorage.getItem('country') 
-  const URL = API_URL + `/browse/featured-playlists?country=${COUNTRY}`
+  const URL = `/api/browse/featured-playlists?country=${COUNTRY}`
   return(dispatch) => {
     dispatch(loadingShow())
     fetch(URL, {
@@ -53,7 +52,7 @@ export const fetchPlaylistReset =  () => {
 
 export const fetchPlaylistTracks = (playlistId) => {
   const TOKEN = localStorage.getItem('access_token')
-  const URL = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`
+  const URL = `/api/playlists/${playlistId}/tracks`
   return(dispatch) => {
     dispatch(loadingShow())
     fetch(URL, {
@@ -94,7 +93,7 @@ export const fetchPlaylistTracksError =  (error) => {
 
 
 export const fetchTrack = (trackId) => {
-  const URL = `https://api.spotify.com/v1/tracks/${trackId}`
+  const URL = `/api/v1/tracks/${trackId}`
   const TOKEN = localStorage.getItem('access_token')
   return(dispatch) => {
     dispatch(loadingShow())
@@ -136,7 +135,7 @@ export const fetchTrackError =  (error) => {
 };
 
 export const userLogin = (access_token) => {
-  const URL = `https://api.spotify.com/v1/me`
+  const URL = `/api/me`
   return(dispatch) => {
     fetch(URL, {
         method: 'GET',
